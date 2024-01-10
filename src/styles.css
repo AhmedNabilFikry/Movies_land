@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+  padding-top: 10px;
+  color: white;
+  font-family: 'Comic Neue', cursive;
+  background-color: #131722;
+}
+.overview{
+  color: rgb(177 165 165);
+
+}

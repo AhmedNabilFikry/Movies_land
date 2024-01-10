@@ -1,0 +1,43 @@
+<div class="container-md">
+  <div class="row py-5 justify-content-center">
+    <div class="py-3">
+      <input type="text" class="form-control" [(ngModel)] = "term" placeholder="Search">
+    </div>
+    @for (movie of movies | search:term:'title'; track movie.id) {
+      <div  class="col-md-2">
+        <a [routerLink]="['/moviedetails',movie.id]" routerLinkActive="router-link-active"  class="movie" (mouseenter)="toggleButton(true)" (mouseleave)="toggleButton(false)">
+          <img [src]="imgPrefix + movie.poster_path" alt="" class="w-100 mb-2">
+          <p class="h6">⭐{{movie.vote_average.toFixed(1)}}</p>
+          <h3 class="h6 mb-3 mt-1">{{movie.title}}</h3>
+          <p class="overview">{{movie.overview | seemore:5}}</p>
+          <!-- <button *ngIf="showButton" class="details-button" (click)="navigateToDetails(movie.id)">See More</button> -->
+          <i *ngIf="showButton" (click)="navigateToDetails(movie.id)" class="fa-solid fa-circle-arrow-down details-button" style="color: #65686c;"></i>
+        </a>
+      </div>
+    }@empty {
+      <div class="col-sm-12 text-center">No results found.</div>
+    }
+  </div>
+</div>
+
+<nav aria-label="Page navigation example">
+        <ul class="pagination  justify-content-center">
+            <li class="page-item cursor-pointer">
+                <a class="page-link" aria-label="Previous" (click)="previousPage()" [class.disabled]="currentPage === 1">
+                    <span aria-hidden="true">Previous</span>
+                </a>
+            </li>
+        <ng-container *ngFor="let page of pages">
+          <li style="cursor: pointer;" class="page-item" [class.active]="currentPage === page" (click)="onChangePage(page)">
+            <a class="page-link cursor-pointer" >{{ page }}</a></li>
+          </ng-container>
+            <li class="page-item cursor-pointer">
+                <a class="page-link" aria-label="Next" (click)="nextPage()" [class.disabled]="currentPage === pageItems">
+                    <span aria-hidden="true">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+

@@ -1,0 +1,90 @@
+<header class="container-fluid">
+    <owl-carousel-o [options]="customOptions">
+      @for (movie of trendingMovies; track movie.id) {
+        <ng-container>
+          <ng-template carouselSlide [id]="movie.id">
+            <img [src]="imgPrefix + movie.poster_path" alt="" class="w-100">
+          </ng-template>
+        </ng-container>
+      }
+      @empty {
+        Empty
+      }
+
+    </owl-carousel-o>
+</header>
+<div class="container">
+  <div class="row py-5">
+    <div class="col-md-4 d-flex align-items-center">
+      <div>
+        <div class="brder w-25 mb-3"></div>
+        <h2>Trending <br> Movies <br> To Watch Right Now</h2>
+          <p class="txt">Most Watched Movies By Day </p>
+        <div class="brder w-100"></div>
+      </div>
+    </div>
+    @for (movie of trendingMovies; track movie.id) {
+      <div class="col-md-2">
+        <a [routerLink]="['/moviedetails',movie.id]" routerLinkActive="router-link-active"  class="movie">
+          <img [src]="imgPrefix + movie.poster_path" alt="" class="w-100">
+          <p class="h6">⭐{{movie.vote_average.toFixed(1)}}</p>
+          <h3 class="h6 mb-3 mt-1">{{movie.title}}</h3>
+          <!-- <h3 class="h6 mb-3 mt-1">{{movie.overview | seemore:10}}</h3> -->
+        </a>
+      </div>
+    }@empty {
+      List is Empty
+    }
+  </div>
+
+
+  <div class="row py-5">
+    <div class="col-md-4 d-flex align-items-center">
+      <div>
+        <div class="brder w-25 mb-3"></div>
+        <h2>Trending <br> tv <br> To Watch Right Now</h2>
+          <p class="txt">Most Watched tv series By Day </p>
+        <div class="brder w-100"></div>
+      </div>
+    </div>
+    @for (tv of trendingTvShows; track tv.id) {
+      <div class="col-md-2">
+        <a class="movie">
+          <img [src]="imgPrefix+ tv.poster_path" alt="" class="w-100">
+          <h3 class="h6 mb-3 mt-1">{{tv.name}}</h3>
+        </a>
+      </div>
+    }@empty {
+      list is Empty
+    }
+  </div>
+
+
+  <div class="row py-5">
+    <div class="col-md-4 d-flex align-items-center">
+      <div>
+        <div class="brder w-25 mb-3"></div>
+        <h2>Trending <br> Persons <br> To Watch Right Now</h2>
+          <p class="txt">Most Persons Movies By Day </p>
+        <div class="brder w-100"></div>
+      </div>
+    </div>
+    @for (person of trendingPersons; track person.id) {
+      <div class="col-md-2">
+        <div class="movie">
+          <img [src]="imgPrefix+person.profile_path" alt="" class="w-100">
+          <h3 class="h6 mb-3 mt-1">{{person.name}}</h3>
+        </div>
+    </div>
+    }
+    @empty {
+      No Data Found For Trending Person
+    }
+  </div>
+
+
+
+
+
+
+
